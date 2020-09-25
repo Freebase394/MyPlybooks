@@ -1,10 +1,10 @@
 - hosts: all
   tasks:
-  - name: Ansible delete files older than 5 days example
+  - name: Ansible delete files older than 5m example
     find:
       paths: /tmp/
       # pode ser usado 1d | 1h | 1m | 1s
-      age: 1d
+      age: 5m
     register: files_to_delete
 
   - name: Ansible remove files older than a date example
