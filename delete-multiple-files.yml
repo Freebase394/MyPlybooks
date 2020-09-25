@@ -1,13 +1,14 @@
 - hosts: all
   tasks:
-  - name: Ansible delete file glob
+  - name: Ansible delete file wildcard
     find:
       paths: /temp/
-      patterns: *.txt
-    register: files_to_delete
+      patterns: "^test.*.txt"
+      use:regex: true
+    register: wildcard_files_to_delete
 
-  - name: Ansible remove file glob
+  - name: Ansible remove file wildcard
     file:
       path: "{{ item.path }}"
       state: absent
-    with_items: "{{ files_to_delete.files }}"
+    with_items: "{{ wildcard_files_to_delete.files }}"
