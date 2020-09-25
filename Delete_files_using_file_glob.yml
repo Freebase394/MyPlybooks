@@ -5,5 +5,4 @@
  
 tasks:
     - name: Ansible delete file wildcard example
-        dest: /temp/
-        shell: rm -rf housingdata* 
+            shell: rm -rf /temp/housingdata* 
