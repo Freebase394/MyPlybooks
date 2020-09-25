@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+  - name: Ansible delete directory example "/tmp/ directory" Test OnlyHard
+  file:
+    path: /tmp/
+    state: absent
