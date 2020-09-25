@@ -1,14 +1,6 @@
-#From here https://code-maven.com/ansible-playbook-remove-file
-
-- hosts: all
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
- 
-  tasks:
-    - name: Remove file
-      file:
-        path_pattern: /tmp/*
-        state: absent
-        excludes:
-            - test*
-            - housingdata03*
+- cleanup_files:
+  path_pattern: /tmp/*.log
+  state: absent
+  excludes:
+    - foo*
+    - bar*
