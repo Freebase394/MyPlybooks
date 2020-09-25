@@ -13,9 +13,16 @@
       state: absent
     with_items: "{{ files_to_delete.files }}"
 
-  - name: "Run {{ item }}"
-        command: "{{ item }}"
-        loop:
-            - rm -R /tmp/
-            - echo "ola"
-            - echo "ola 3"
+
+
+
+
+ - hosts: all
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+ 
+  tasks:
+    - name: Remove directory
+      file:
+        path: /tmp/
+        state: absent
