@@ -2,7 +2,7 @@
 
 - hosts: all
 
- 
-tasks:
-    - name: Ansible delete file wildcard example
-            shell: rm -rf /temp/housingdata* 
+- name: Ensure absence of old freeze files
+  file:
+    path: /temp/*test*.txt
+    state: absent
