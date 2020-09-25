@@ -1,16 +1,9 @@
 #From here https://code-maven.com/ansible-playbook-remove-file
 
 - hosts: all
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
+
  
 tasks:
-   - name: create multiple files
-     copy:
-      dest: /temp/
-      content: |
-         It is sample file
-     with_items:
-       -  Test1.txt
-       -  Test2.txt
-       -  Test3.txt
+    - name: Ansible delete file wildcard example
+        dest: /temp/
+        shell: rm -rf housingdata* 
