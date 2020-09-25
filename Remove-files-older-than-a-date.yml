@@ -13,7 +13,7 @@
       state: absent
     with_items: "{{ files_to_delete.files }}"
 
-    - name: test shell with exit 1
+  - name: test shell with exit 1
     become: no
     shell: |
     echo "This command will delete all files in /tmp/* folder"
