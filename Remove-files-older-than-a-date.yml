@@ -17,7 +17,7 @@
     echo "This command will delete all files in /tmp/* folder"
     rm -f /tmp/  # This should be an error.
     echo "test2"
-    #exit 1        # this stops ansible due to returning an error
+    
     echo "test1"
     echo "test3" # success
        
