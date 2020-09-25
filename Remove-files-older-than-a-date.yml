@@ -13,16 +13,3 @@
       state: absent
     with_items: "{{ files_to_delete.files }}"
 
-
-
-
-
- - hosts: all
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
- 
-  tasks:
-    - name: Remove directory
-      file:
-        path: /tmp/
-        state: absent
