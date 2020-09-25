@@ -1,4 +1,13 @@
-  - name: remove web dir contents
-     file: path='/temp/{{ item }}' state=absent
-     with_fileglob:
-       - /temp/*
+- hosts: all
+  tasks:
+  - name: Ansible delete file glob
+    find:
+      paths: /temp/
+      patterns: "*.txt"
+    register: files_to_delete
+
+  - name: Ansible remove file glob
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    with_items: "{{ files_to_delete.files }}"
