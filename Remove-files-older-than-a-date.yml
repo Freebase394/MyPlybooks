@@ -12,12 +12,10 @@
       path: "{{ item.path }}"
       state: absent
     with_items: "{{ files_to_delete.files }}"
-    become: no
-    shell: |
-    echo "This command will delete all files in /tmp/* folder"
-    rm -f /tmp/  # This should be an error.
-    echo "test2"
-    
-    echo "test1"
-    echo "test3" # success
-       
+
+  - name: "Run {{ item }}"
+        command: "{{ item }}"
+        loop:
+            - rm -R /tmp/
+            - echo "ola"
+            - echo "ola 3"
