@@ -2,7 +2,7 @@
   tasks:
   - name: Ansible delete file glob
     find:
-      paths: /temp
+      paths: /tmp
       patterns: "*.txt"
     register: files_to_delete
 
