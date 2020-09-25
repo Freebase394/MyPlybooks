@@ -1,0 +1,9 @@
+- hosts: 95.217.233.169
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+ 
+  tasks:
+    - name: Remove file
+      file:
+        path: /tmp/testfile.txt
+        state: absent
