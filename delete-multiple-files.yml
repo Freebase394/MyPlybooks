@@ -1,6 +1,4 @@
-- hosts: all
-  tasks:
-        - name: remove web dir contents
+  - name: remove web dir contents
      file: path='/temp/{{ item }}' state=absent
      with_fileglob:
        - /temp/*
