@@ -1,4 +1,6 @@
-- hosts: 95.217.233.169
+#From here https://code-maven.com/ansible-playbook-remove-file
+
+- hosts: all
   vars:
     ansible_python_interpreter: /usr/bin/python3
  
