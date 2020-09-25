@@ -1,8 +1,0 @@
-#From here https://code-maven.com/ansible-playbook-remove-file
-
-- hosts: all
-
-- name: Ensure absence of old freeze files
-  file:
-    path: /temp/*test*.txt
-    state: absent
