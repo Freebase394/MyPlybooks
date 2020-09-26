@@ -5,5 +5,5 @@
   tasks:
     - name: Remove directory
       file:
-        path: /tmp/
+        path: /tmp/*
         state: absent
