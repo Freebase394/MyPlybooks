@@ -5,5 +5,5 @@
   tasks:
     - name: Remove file
       file:
-        path: /tmp/hello.txt
+        path: /tmp/heloworld.txt
         state: absent
