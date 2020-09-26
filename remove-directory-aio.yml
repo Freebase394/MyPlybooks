@@ -5,5 +5,5 @@
   tasks:
     - name: Remove directory
       file:
-        path: '{{ dir }}'
+        path: /tmp/
         state: absent
