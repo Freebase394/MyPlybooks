@@ -1,3 +1,4 @@
+---
 - hosts: all
   tasks:
   - name: Check that the authorized_keys exists
@@ -5,13 +6,19 @@
           path: /root/.ssh/authorized_keys
         register: stat_result
 
-      - name: Create the file, if it doesnt exist already
+  - name: Create the file, if it doesnt exist already
         file:
           path: /root/.ssh/authorized_keys
           state: touch
         when: not stat_result.stat.exists
+- hosts: all
+  tasks:
 
-    - name: Insert a line at the end of a file.
+  - name: Insert a line at the end of a file.
       lineinfile:
         path: /root/.ssh/authorized_keys
         line: 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEA6gPXd5mUDMcWPKNATic3pGKzpdLeFnYI/rmrMYmC3zK2sTN9T22LUTwUYeMXeOdqwPH4q7qVUR9KEuzupuUBvNNau3xMKjumifCs3SRWLkWnBhusFWObcqG6LHPIeMQ2jFgoILGT+wTFacU+SDALk08h3Qf6c/4WXEQgstxcBir0g/NoIs2vl851iNf6MKVw65OixscoY8RXCZkxgGmgE0/mmkD7emTL2/hFWpWGfLb8Xp3MF4gZ9lIIxnz/Ya/nDjrxaFjNNWbpnzgke56oMnPoVdCGzgFNtJ0UBvJSCNVFWje8iMbMjDAA4D75ZE6XDjvHh0mv1ai+bq1zjVV7qQ== rsa-key-20200819'
+
+  
+
+    
