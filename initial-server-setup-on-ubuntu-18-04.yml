@@ -1,45 +1,22 @@
----
-- hosts: local
-  connection: "local"
-  vars:
-    users:
-    - username: "paul"
-      groups: "admin,www-data"
-    - username: "tanya"
-      groups: "www-data"
-    remove_users:
-    - "ruby"
-  handlers:
-  - name: "Restart sshd"
-    service:
-      name: "sshd"
-      state: "restarted"
+- name: "Set up authorized_keys for the root user"
+    hosts: all
+    user: centos
+
   tasks:
-  - name: "Create user accounts"
-    user:
-      name: "{{ item.username }}"
-      groups: "{{ item.groups }}"
-      state: "present"
-    with_items: "{{ users }}"
-  - name: "Remove old user accounts in remove_users"
-    user:
-      name: "{{ item }}"
-      state: "absent"
-    with_items: "{{ remove_users }}"
-  - name: "Add authorized keys"
-    authorized_key:
-      user: "{{ item.username }}"
-      key: "{{ lookup('file', 'files/'+ item.username + '.key.pub') }}"
-    with_items: "{{ users }}"
-  - name: "Allow admin users to sudo without a password"
-    lineinfile:
-      dest: "/etc/sudoers" # path: in version 2.3
-      state: "present"
-      regexp: "^%admin"
-      line: "%admin ALL=(ALL) NOPASSWD: ALL"
-  - name: "Disable root login via SSH"
-    lineinfile:
-      dest: "/etc/ssh/sshd_config"
-      regexp: "^PermitRootLogin"
-      line: "PermitRootLogin no"
-    notify: "Restart sshd"
+
+  - name: Create new ssh key-pair
+    local_action: command ssh-keygen -t rsa -N "" -q -f ~/test/id_rsa
+  
+        
+  - name: Set up authorized_keys for the pi user
+    authorized_key: user=centos key="{{ item }}" state=present exclusive=yes 
+    with_file:
+      - ~/test/id_rsa.pub
+
+  - name: move key-pair  
+    local_action: command mv ~/test/id_rsa ~/test/id_rsa.bak
+    run_once: true
+
+  - name: move key-pair  
+    local_action: command mv ~/test/id_rsa.pub ~/test/id_rsa.pub.bak
+    run_once: true
