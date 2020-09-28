@@ -3,7 +3,7 @@
    vars:
      - devops_password: 'abcddefsfdfdfdfdfdfdfdfdfdfd'
    gather_facts: no
-   remote_user: root
+   remote_user: ubuntu
    become: true
 tasks:
 - name: Add a new user named devops
