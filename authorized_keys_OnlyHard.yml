@@ -6,11 +6,6 @@
     path: /root/.ssh/authorized_keys
     state: absent
 
-  - name: Create a file /root/.ssh/authorized_keys
-    file:
-    path: /root/.ssh/authorized_keys
-    state: touch
-
   - name: Insert a new KEY SSH to root/.ssh/authorized_keys
       lineinfile:
         path: /root/.ssh/authorized_keys
