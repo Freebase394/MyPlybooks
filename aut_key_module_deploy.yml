@@ -1,5 +1,28 @@
-- name: Set authorized key taken from file
-  ansible.posix.authorized_key:
-    user: charlie
-    state: present
-    key: "{{ lookup('file', '/home/charlie/.ssh/id_rsa.pub') }}"
+---
+ - hosts: all
+   vars:
+     - devops_password: 'abcddefsfdfdfdfdfdfdfdfdfdfd'
+   gather_facts: no
+   remote_user: root
+   become: true
+tasks:
+- name: Add a new user named devops
+     user:
+          name: devops
+          shell: /bin/bash
+          password: "{{ devops_password }}"
+- name: Add devops user to the sudoers
+     copy:
+          dest: "/etc/sudoers.d/devops"
+          content: "devops  ALL=(ALL)  NOPASSWD: ALL"
+- name: Deploy SSH Key
+     authorized_key: user=devops
+                     key="{{ lookup('file', '/home/devops/.ssh/id_rsa.pub') }}"
+                     state=present
+     notify:
+       - restart ssh
+handlers:
+   - name: restart ssh
+     service:
+       name=sshd
+       state=restarted
