@@ -1,54 +1,13 @@
----
-- hosts: all
-  become: true
-  vars_files: vars/default.yml
-
+- name: generate SSH key
+  hosts: all
+  connection: local
+  vars:
+    ssh_key_filename: id_rsa_myproject
   tasks:
-    - name: Install Prerequisites
-      apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
-
-  # Sudo Group Setup
-    - name: Make sure we have a 'wheel' group
-      group:
-        name: wheel
+    - name: generate SSH key "{{ssh_key_filename}}"
+      openssh_keypair:
+        path: "~/.ssh/{{ssh_key_filename}}"
+        type: rsa
+        size: 4096
         state: present
-
-    - name: Allow 'wheel' group to have passwordless sudo
-     lineinfile:
-        path: /etc/sudoers
-        state: present
-        regexp: '^%wheel'
-        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-        validate: '/usr/sbin/visudo -cf %s'
-
-  # User + Key Setup
-    - name: Create a new regular user with sudo privileges
-      user:
-        name: "{{ create_user }}"
-        state: present
-        groups: wheel
-        append: true
-        create_home: true
-        shell: /bin/bash
-
-    - name: Set authorized key for remote user
-      authorized_key:
-        user: "{{ create_user }}"
-        state: present
-        key: "{{ copy_local_key }}"
-
-    
-    # Install Packages
-    - name: Update apt
-      apt: update_cache=yes
-
-    - name: Install required system packages
-      apt: name={{ sys_packages }} state=latest
-
- # UFW Setup
-    - name: UFW - Allow SSH connections
-      ufw:
-        rule: allow
-        name: OpenSSH
-
-    
+        force: no
