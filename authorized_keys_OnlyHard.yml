@@ -5,10 +5,9 @@
         stat:
           path: /root/.ssh/authorized_keys
         register: stat_result
-        tags:
-        - aaa
+       
 
-    - name: My First Tasks.
+    
   - name: Create the file, if it doesnt exist already
         file:
           path: /root/.ssh/authorized_keys
