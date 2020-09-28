@@ -1,5 +1,16 @@
 - hosts: all
   tasks:
+  - name: Check that the authorized_keys exists
+        stat:
+          path: /root/.ssh/authorized_keys
+        register: stat_result
+
+      - name: Create the file, if it doesnt exist already
+        file:
+          path: /root/.ssh/authorized_keys
+          state: touch
+        when: not stat_result.stat.exists
+
     - name: Insert a line at the end of a file.
       lineinfile:
         path: /root/.ssh/authorized_keys
