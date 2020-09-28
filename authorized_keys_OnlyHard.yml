@@ -1,5 +1,3 @@
-#---
-#- name: Garantir que o arquivo vai ser editado e vai ser inserido as 'public keys''
 - hosts: all
   tasks:
 
