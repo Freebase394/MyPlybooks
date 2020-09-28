@@ -1,2 +1,4 @@
-- name: Unconditionally reboot the machine with all defaults
+---
+- hosts: all
+ - name: Unconditionally reboot the machine with all defaults
   reboot:
