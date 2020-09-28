@@ -1,0 +1,9 @@
+---
+- hosts: all
+  - name: Start 4 load-balanced containers
+  community.general.docker_container:
+    name: "container{{ item }}"
+    recreate: yes
+    image: someuser/anotherappimage
+    command: sleep 1d
+  with_sequence: count=4
