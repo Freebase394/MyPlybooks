@@ -1,27 +1,27 @@
 ---
   #- name: This is to create a file authorized_keys
-  -
+
   - hosts: all
     tasks:
   - name: find out /root/.ssh/authorized_keys_test file exists or not'
     stat:
-        path: /root/.ssh/authorized_keys_test
+    path: /root/.ssh/authorized_keys_test
     register: authorized_keysresult
     tags:
-        - always
+    - always
   - name: 'Remove authorized_keys from /root/.ssh/ file if authorized_keys already running'
     file:
-        path: /root/.ssh/authorized_keys_test
-        state: absent
+    path: /root/.ssh/authorized_keys_test
+    state: absent
     when: authorized_keysresult.stat.exists == true
     ignore_errors: yes
     tags:
-        - always
+    - always
 
   - shell: ls $HOME/.ssh/
     register: result
 
   - name: Create a file called '/root/.ssh/authorized_keys' with the content 'hello world'.
     copy:
-        content: hello world
-        dest: /root/.ssh/authorized_keys_test
+    content: hello world
+    dest: /root/.ssh/authorized_keys_test
