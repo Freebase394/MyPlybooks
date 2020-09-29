@@ -1,8 +1,15 @@
-- hosts: all
-  tasks:
-    - name: Add a line to a file if the file does not exist, without passing regexp
-    lineinfile:
-    path: /root/.ssh/authorized_keys
-    line: Listen 8080
-    state: present
-    create: yes
+---
+  - name: Examples of lineinfile
+    hosts: web
+    
+    tasks:
+      - name: "Example2: Add the line if it does not exist"
+        become: yes
+        become_user: root
+        tags: example2
+        lineinfile:
+          path: /root/.ssh/authorized_keys
+          line: "LogLevel debug"
+          state: present
+          backup: yes
+        register: example2out
