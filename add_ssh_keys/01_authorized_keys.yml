@@ -2,15 +2,9 @@
 ---
   - name: Examples of lineinfile
     hosts: all
-    remote_user: root
-    
+        
     tasks:
-        
-      - name: Create a file called '/root/.ssh/authorized_keys' with the content 'hello world'.
-        copy:
-        content: hello world
-        dest: /root/.ssh/authorized_keys_test
-        
+              
       - name: "Example2: Add the line if it does not exist"
         become: yes
         become_user: root
