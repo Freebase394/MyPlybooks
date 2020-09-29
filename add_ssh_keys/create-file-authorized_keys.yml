@@ -14,5 +14,5 @@
       state: absent
       when: authorized_keysresult.stat.exists == true
       ignore_errors: yes
-    tags:
+  tags:
       - always
