@@ -2,7 +2,7 @@
 - name: WTF im doing
 - hosts: all
   tasks:
-  - name: find out /root/.ssh/authorized_keys_test file exists or not
+    - name: find out /root/.ssh/authorized_keys_test file exists or not
     stat:
     path: /root/.ssh/authorized_keys_test
     register: authorized_keysresult
