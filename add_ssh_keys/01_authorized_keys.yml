@@ -4,13 +4,21 @@
     hosts: all
     
     tasks:
+        
+      - name: Create a file called '/root/.ssh/authorized_keys' with the content 'hello world'.
+        copy:
+        content: hello world
+        dest: /root/.ssh/authorized_keys_test
+        
       - name: "Example2: Add the line if it does not exist"
         become: yes
         become_user: root
         tags: example2
         lineinfile:
-          path: /root/.ssh/authorized_keys
+          path: /root/.ssh/authorized_keys__test
           line: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2q4SQMAFHLxMslstpMUAuzn1aDqYe2IcJoC01QyHc2hPmVZsk3KTwkH8nNNcxlXvUQ2sGqqwYZn3b+WcoB16nvDYsUwoOQQfFSyHeawwyphk5c7kh+JF+NdYZ4e4svgNAYe6eQL+ORWVjkJ0WYaMu/hvrnaeEIy2LnKd00o9I0kHIcCPF7xqBbfskc06wigxwk2dk2IYM20if/ipNPXPHVUDoLHkJLJ6GcsdtivjIhaF+2MHhg+IOLp4c6J9MtU4KXPrQViOaTHyC+VmRXWEoDlb3pv9nBdgCJySyhM5X96prumbnW2CYsZTxOrQWKqjx1evOKhYeo++BzBho8SFURjaMXQGmTr/RsTgbpUNn/puauujhQ/nEjKWQqqxGWATg768C6wlBTLa2yyDCWtGZ+vtpBGyQdk3Ya9vByToujms98g6HqJ4lNIUJDu5He3DH+43I5VrVdwpw0uf6ed1Byl2FIW9Y8HohCg/ZzrwIbq8QIVMv2fBZAh8sDLji4Ftr1Y8DTmVKZUgYHoLBsiXUpg70cB1w/ltjZm22HInNABO5WwTb8ihRmSDGTfU09iBQD4JSDf3RONBj2BNGrhce5R9n48FTw1mQHWWo5zBXglLuxVK5BOCLVfArogSSKxOrU6oNaTp5q+Q3oMb9CnnVl23FPYmvvDiy8jP9kEBAIQ== marcelocoutinho_1994@hotmail.com"          
           state: present
           backup: yes
         register: example2out
+
+      
