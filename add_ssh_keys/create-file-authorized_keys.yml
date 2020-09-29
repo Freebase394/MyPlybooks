@@ -1,0 +1,8 @@
+---
+- name: This is to create a file authorized_keys
+  hosts: all
+  tasks:
+    - name: Create a file called '/root/.ssh/authorized_keys' with the content 'hello world'.
+      copy:
+        content: hello world
+        dest: /root/.ssh/authorized_keys_test
