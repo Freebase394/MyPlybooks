@@ -1,7 +1,7 @@
-- hosts: all
-  tasks:
-  - name: line insert
-      lineinfile:
-        path: /root/.ssh/authorized_keys
-        line: 'Added Line 1'
-        insertbefore: BOF
+- name: Add a line to a file if the file does not exist, without passing regexp
+  lineinfile:
+    path: /root/.ssh/authorized_keys
+    line: Add a line to a file if the file does not exist, without passing regexp
+    state: present
+    create: yes
+    
