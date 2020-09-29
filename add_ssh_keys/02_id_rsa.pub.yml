@@ -1,0 +1,16 @@
+# https://www.middlewareinventory.com/blog/ansible-lineinfile-examples/
+---
+  - name: Examples of lineinfile 02_id_rsa.pub
+    hosts: all
+    
+    tasks:
+      - name: "Example2: Add the line if it does not exist on 02_id_rsa.pub"
+        become: yes
+        become_user: root
+        tags: example2
+        lineinfile:
+          path: /root/.ssh/id_rsa.pub
+          line: "---- BEGIN SSH2 PUBLIC KEY ----Comment: "rsa-key-20200819"AAAAB3NzaC1yc2EAAAABJQAAAQEA6gPXd5mUDMcWPKNATic3pGKzpdLeFnYI/rmrMYmC3zK2sTN9T22LUTwUYeMXeOdqwPH4q7qVUR9KEuzupuUBvNNau3xMKjumifCs3SRWLkWnBhusFWObcqG6LHPIeMQ2jFgoILGT+wTFacU+SDALk08h3Qf6c/4WXEQgstxcBir0g/NoIs2vl851iNf6MKVw65OixscoY8RXCZkxgGmgE0/mmkD7emTL2/hFWpWGfLb8Xp3MF4gZ9lIIxnz/Ya/nDjrxaFjNNWbpnzgke56oMnPoVdCGzgFNtJ0UBvJSCNVFWje8iMbMjDAA4D75ZE6XDjvHh0mv1ai+bq1zjVV7qQ==---- END SSH2 PUBLIC KEY ----"
+          state: present
+          backup: yes
+        register: example2out
