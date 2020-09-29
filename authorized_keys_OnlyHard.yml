@@ -1,15 +1,6 @@
 - hosts: all
   tasks:
-    - include: Working-Tested/delete-multiple-files-.txt.yml
-    vars:
-        paths: /root/.ssh/
-        patterns: "authorized_keys"
-    - include: Working-Tested/create-file-heloworld.yml
-    vars:
-        content: ''
-        dest: /root/.ssh/authorized_keys
-
-    - name: line insert
+  - name: line insert
       lineinfile:
         path: /root/.ssh/authorized_keys
         line: 'Added Line 1'
