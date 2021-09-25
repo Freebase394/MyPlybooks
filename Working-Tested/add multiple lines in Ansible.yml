@@ -1,21 +1,22 @@
 --- 
 - hosts: all
   tasks:
-  - name: Ansible delete all  file glob
-    find:
-      paths: /tmp
-      patterns: "*" # Podemos adicionar "*.txt" | "heloworld.txt" | "*"(este apaga todos os arquivos ) etc...
-    register: files_to_delete
 
-  - name: Ansible remove file glob
-    file:
-      path: "{{ item.path }}"
+  # Podemos adicionar "*.txt" | "heloworld.txt" | "*"(este apaga todos os arquivos ) etc...
+  - name: Ansible delete all  file glob
+  - find:
+      paths: /tmp/  
+      patterns: "*.web"
+    register: find_results
+
+  - file:
+      path: "{{ item['path'] }}"
       state: absent
-    with_items: "{{ files_to_delete.files }}"  
+    with_items: "{{ find_results['files'] }}"
   - name: Add temp marker
     copy:
-        content: '### AFTER THIS LINE'
-        dest: /tmp/heloworld.txt  
+      content: '### AFTER THIS LINE'
+      dest: /tmp/heloworld.txt  
     lineinfile:
       path: /tmp/heloworld.txt
       insertafter: '### AFTER THIS LINE'
