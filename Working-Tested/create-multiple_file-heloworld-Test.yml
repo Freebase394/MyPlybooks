@@ -3,8 +3,21 @@
   gather_facts: no
   become: no
   tasks:
+
+  # TaskNº1
     - name: generate 100 empty files
       file:
-        path: "/tmp/playing_opera/loopdemo/file{{ item }}"
+        path: "/tmp/loopdemo/file{{ item }}"
         state: touch
       with_sequence: start=1 end=100
+    # TaskNº2
+    - name: create the location/directory
+      file:
+        path: /tmp/loopdemo
+        state: directory
+    # TaskNº3
+    - name: generate empty file from a list of file names
+      file:
+        path: "/tmp/loopdemo/{{ item }}"
+        state: touch
+      loop: [ fruitsList, censusReport, countryList ]
