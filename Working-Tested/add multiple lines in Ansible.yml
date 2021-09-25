@@ -4,10 +4,12 @@
 
   - name: call the slave playbook delete-multiple-files-.txt.yml
     include_tasks: delete-multiple-files-.txt.yml
-  - name: asdasdasdsa
+
+  - name: call the slave create-file-heloworld.yml
+    include_tasks: create-file-heloworld.yml
     copy:
-      content: '### AFTER THIS LINE'
-      dest: /tmp/heloworld.txt  
+        content: '### AFTER THIS LINE'
+        dest: /tmp/heloworld.txt  
     lineinfile:
       path: /tmp/heloworld.txt
       insertafter: '### AFTER THIS LINE'
