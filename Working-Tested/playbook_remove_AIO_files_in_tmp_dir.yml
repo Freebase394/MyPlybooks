@@ -1,0 +1,16 @@
+---
+- hosts: all
+- name: Get directory listing
+  become: yes
+  find:
+    paths: /tmp/
+    patterns: '*'
+    hidden: yes
+  register: directory_content_result
+
+- name: Remove directory content
+  become: yes
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ directory_content_result.files }}"
