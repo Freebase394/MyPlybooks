@@ -1,0 +1,16 @@
+---
+- name: WTF im doing
+- hosts: all
+  tasks:
+  - name: find out /root/.ssh/authorized_keys_test file exists or not
+    stat:
+      path: /root/.ssh/authorized_keys_test
+      register: authorized_keysresult
+
+
+  - name: "Remove authorized_keys from /root/.ssh/ file if authorized_keys already running"
+    file:
+       path: /root/.ssh/authorized_keys_test
+    state: absent
+    when: authorized_keysresult.stat.exists == true
+    ignore_errors: yes

@@ -1,3 +1,0 @@
-- name: Rebooting ...
-    reboot:
-      reboot_timeout: 60
