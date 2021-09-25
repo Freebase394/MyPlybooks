@@ -1,0 +1,14 @@
+---
+- name: This is a hello-world example
+  hosts: all
+  tasks:
+   - name: create multiple files
+     copy:
+      #dest: "{{ item }}"
+      dest: /tmp/"{{ item }}"
+      
+      content: |
+         It is sample file
+      with_items:
+        -  Test1.txt
+        -  Test2.txt
