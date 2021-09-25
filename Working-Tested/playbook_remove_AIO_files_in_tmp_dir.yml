@@ -3,8 +3,8 @@
   tasks:
   - name: Ansible delete files older than 5 days example
     find:
-      paths: /Users/dnpmacpro/Documents/Ansible
-      age: 5d
+      paths: /tmp/
+      age: 1m
     register: files_to_delete
 
   - name: Ansible remove files older than a date example
