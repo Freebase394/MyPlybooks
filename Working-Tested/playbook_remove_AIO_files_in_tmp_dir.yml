@@ -1,16 +1,14 @@
 ---
 - hosts: all
-- name: Get directory listing
-  become: yes
-  find:
-    paths: /tmp/
-    patterns: '*'
-    hidden: yes
-  register: directory_content_result
+  tasks:
+  - name: Ansible delete files older than 5 days example
+    find:
+      paths: /Users/dnpmacpro/Documents/Ansible
+      age: 5d
+    register: files_to_delete
 
-- name: Remove directory content
-  become: yes
-  file:
-    path: "{{ item.path }}"
-    state: absent
-  with_items: "{{ directory_content_result.files }}"
+  - name: Ansible remove files older than a date example
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    with_items: "{{ files_to_delete.files }}"
