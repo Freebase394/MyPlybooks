@@ -3,7 +3,7 @@
     ansible_python_interpreter: /usr/bin/python3
  
   tasks:
-    - name: Remove directory
+    - name: Remove directory ##Test
       file:
         path: /tmp/*
         state: absent
