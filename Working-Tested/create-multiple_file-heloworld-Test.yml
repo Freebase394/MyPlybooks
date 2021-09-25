@@ -5,11 +5,11 @@
   tasks:
 
   # TaskNº1
-    - name: generate 100 empty files
-      file:
-        path: "/tmp/loopdemo/file{{ item }}"
-        state: touch
-      with_sequence: start=1 end=100
+    #- name: generate 100 empty files
+     # file:
+      #  path: "/tmp/loopdemo/file{{ item }}"
+       # state: touch
+      #with_sequence: start=1 end=100
     # TaskNº2
     - name: create the location/directory
       file:
