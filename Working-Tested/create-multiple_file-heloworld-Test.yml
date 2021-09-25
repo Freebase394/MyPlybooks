@@ -3,7 +3,7 @@
   gather_facts: no
   become: no
   tasks:
-
+#https://blogchinmaya.blogspot.com/2019/04/ansible-playbook-generating-multiple.html
   # TaskNº1
     #- name: generate 100 empty files
      # file:
