@@ -2,15 +2,9 @@
 - hosts: all
   tasks:
 
- 
-  - find:
-      paths: /tmp/
-      patterns: "heloworld.txt"  # Podemos adicionar "*.txt" | "heloworld.txt" | "*"(este apaga todos os arquivos ) etc...
-    register: find_results
-  - file:
-      path: "{{ item['path'] }}"
-      state: absent
-    with_items: "{{ find_results['files'] }}"
+  - name: call the slave playbook delete-multiple-files-.txt.yml
+    include_tasks: delete-multiple-files-.txt.yml
+  - name: asdasdasdsa
     copy:
       content: '### AFTER THIS LINE'
       dest: /tmp/heloworld.txt  
