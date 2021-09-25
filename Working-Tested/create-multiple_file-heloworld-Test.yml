@@ -1,21 +1,10 @@
----
-- name: This is a hello-world example
-  hosts: all
+--- 
+- hosts: all
+  gather_facts: no
+  become: no
   tasks:
-   - name: create multiple files
-     copy:
-      #dest: "{{ item }}"
-      dest: /tmp/"{{ item }}"
-      
-      content: |
-         It is sample file
-      with_items:
-        -  Test1.txt
-        -  Test2.txt
-        -  Test3.txt
-        -  Test4.txt
-        -  Test5.txt
-        -  Test6.txt
-
-        
-        
+    - name: generate 100 empty files
+      file:
+        path: "/tmp/playing_opera/loopdemo/file{{ item }}"
+        state: touch
+      with_sequence: start=1 end=100
