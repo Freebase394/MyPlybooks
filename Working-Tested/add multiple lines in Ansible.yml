@@ -9,7 +9,7 @@
       state: present
   - name: Add content
     lineinfile:
-      path: /tmp/abcdd
+      path: /tmp/abcd
       insertbefore: '###TEMP MARKER###'
       line: "{{ item }}"
     with_items:
