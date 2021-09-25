@@ -1,0 +1,23 @@
+--- 
+- hosts: all
+  tasks:
+  - name: Add temp marker
+    lineinfile:
+      path: /tmp/abcd
+      insertafter: '### AFTER THIS LINE'
+      line: "###TEMP MARKER###"
+      state: present
+  - name: Add content
+    lineinfile:
+      path: /tmp/abcdd
+      insertbefore: '###TEMP MARKER###'
+      line: "{{ item }}"
+    with_items:
+      - '# This is line 1'
+      - '# This is line 2'
+      - '# This is line 3'
+  #- name: Remove temp marker
+   # lineinfile:
+  #    path: /tmp/abcd
+   #   line: "###TEMP MARKER###"
+  #    state: absent
