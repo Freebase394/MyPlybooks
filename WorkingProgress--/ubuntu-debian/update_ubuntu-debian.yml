@@ -1,10 +1,22 @@
-- hosts: all
-  become: 'yes'
-  become_method: sudo
-  tasks: null
-- name: Update cache & Full system update
-  apt: null
-  update_cache: true
-  upgrade: dist
-  cache_valid_time: 3600
-  force_apt_get: true
+---
+- hosts:
+    - all
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt: update_cache=yes
+
+    - name: Upgrade packages
+      apt: upgrade=dist
+
+    - name: Check if a reboot is required
+      register: reboot_required_file
+      stat: path=/var/run/reboot-required get_md5=no
+
+    - name: restart machine
+      become: yes
+      shell: sleep 2 && shutdown -r now "Ansible updates triggered"
+      async: 1
+      poll: 0
+      ignore_errors: true
+      when: reboot_required_file.stat.exists == true
